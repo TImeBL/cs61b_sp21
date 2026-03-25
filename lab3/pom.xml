@@ -40,5 +40,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <!-- Checker Framework 注解 -->
+        <dependency>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId>
+            <version>3.33.0</version>
+        </dependency>
+    </dependencies>
     
 </project>
