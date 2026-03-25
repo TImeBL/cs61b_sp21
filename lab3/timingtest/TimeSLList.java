@@ -1,5 +1,6 @@
 package timingtest;
-import afu.org.checkerframework.checker.igj.qual.I;
+//测试环境用不上
+//import afu.org.checkerframework.checker.igj.qual.I;
 import edu.princeton.cs.algs4.Stopwatch;
 
 /**
