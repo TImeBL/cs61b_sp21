@@ -136,4 +136,18 @@ public class LinkedListDequeTest {
 
         */
     }
+
+    @Test
+    public void test() {
+        LinkedListDeque<Integer> test = new LinkedListDeque<>();
+        test.addFirst(3);
+        test.addFirst(2);
+        test.addFirst(1);
+        test.addLast(4);
+        test.addFirst(5);
+        test.removeFirst();
+        test.removeLast();
+        int a = test.get(2);
+        int b = test.getRecursive(2);
+    }
 }
