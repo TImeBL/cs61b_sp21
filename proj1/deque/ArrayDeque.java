@@ -50,8 +50,8 @@ public class ArrayDeque<type> {
         if (size == queue.length) {
             resize(queue.length * 2);
         }
-        rear = plusOne(rear);
         queue[rear] = input;
+        rear = plusOne(rear);
         size++;
     }
 
@@ -65,7 +65,7 @@ public class ArrayDeque<type> {
 
     public void printDeque() {
         int cur = front;
-        while (plusOne(cur) != rear) {
+        while (cur != rear) {
             System.out.print(queue[cur] + " ");
             cur = plusOne(cur);
         }
@@ -76,8 +76,8 @@ public class ArrayDeque<type> {
         if (size == 0) {
             return null;
         }
-        type temp = queue[rear];
-        rear = plusOne(rear);
+        type temp = queue[front];
+        front = plusOne(front);
         size--;
 
         if (queue.length >= 16 && size <= queue.length / 4) {
@@ -90,7 +90,7 @@ public class ArrayDeque<type> {
         if (size == 0) {
             return null;
         }
-        type temp = queue[rear];
+        type temp = queue[rear - 1];
         rear = minusOne(rear);
         size--;
 
