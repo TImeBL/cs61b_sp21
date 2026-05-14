@@ -1,6 +1,9 @@
 package deque;
 
-public class ArrayDeque<type> {
+import java.util.Iterator;
+
+public class ArrayDeque<type> implements Iterable<type>, Deque<type> {
+
     // 构造类属性
     private int size;
     private type[] queue;
@@ -55,9 +58,11 @@ public class ArrayDeque<type> {
         size++;
     }
 
+    /*
     public boolean isEmpty() {
         return size == 0;
     }
+     */
 
     public int size() {
         return size;
@@ -90,7 +95,7 @@ public class ArrayDeque<type> {
         if (size == 0) {
             return null;
         }
-        type temp = queue[rear - 1];
+        type temp = queue[minusOne(rear)];
         rear = minusOne(rear);
         size--;
 
@@ -110,5 +115,53 @@ public class ArrayDeque<type> {
 
     public type getRecursive(int index) {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
+    }
+
+    // 重写迭代器接口
+    @Override
+    public Iterator<type> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    // 重写迭代器类型和方法
+    private class ArrayDequeIterator implements Iterator<type> {
+        private int wizPos;
+
+        ArrayDequeIterator() {
+            wizPos = front;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return plusOne(wizPos) != rear - 1;
+        }
+
+        @Override
+        public type next() {
+            return queue[wizPos++];
+        }
+    }
+
+    // 重写 equals()
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof ArrayDeque) {
+            ArrayDeque<type> lst = (ArrayDeque<type>) o;
+            if (size != lst.size) {
+                return false;
+            }
+            Iterator<type> lstIterator = lst.iterator();
+            while (iterator().hasNext() && lstIterator.hasNext()) {
+                if (iterator().next() != lstIterator.next()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

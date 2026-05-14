@@ -1,6 +1,9 @@
 package deque;
 
-public class LinkedListDeque<type> {
+import java.util.Iterator;
+
+public class LinkedListDeque<type> implements Iterable<type>, Deque<type> {
+
     // 构造结点类型
     private static class NewNode<item> {
         item data;
@@ -47,9 +50,11 @@ public class LinkedListDeque<type> {
         size++;
     }
 
+    /*
     public boolean isEmpty() {
         return size == 0;
     }
+     */
 
     public int size() {
         return size;
@@ -102,5 +107,57 @@ public class LinkedListDeque<type> {
             return null;
         }
         return head.getRecursive(index);
+    }
+
+    // 重写迭代器接口
+    @Override
+    public Iterator<type> iterator() {
+        return new LinkedListDequeIterator();
+    }
+
+    // 构建迭代器类型与方法
+    private class LinkedListDequeIterator implements Iterator<type> {
+        private NewNode<type> wizNode;
+        private int wizPos;
+
+        LinkedListDequeIterator() {
+            wizNode = head;
+            wizPos = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wizNode.next != head;
+        }
+
+        @Override
+        public type next() {
+            NewNode<type> curNode = wizNode;
+            wizNode = wizNode.next;
+            wizPos++;
+            return curNode.data;
+        }
+    }
+
+    // 重写 equals()
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof LinkedListDeque) {
+            LinkedListDeque<type> lst = (LinkedListDeque<type>) o;
+            if (size != lst.size) {
+                return false;
+            }
+            for (int i = 0; i < size; i++) {
+                if (get(i) != lst.get(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
