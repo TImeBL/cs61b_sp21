@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.List;
 
-
-/** Assorted utilities.
- *  @author P. N. Hilfinger
+/**
+ * Assorted utilities.
+ * @author P. N. Hilfinger
  */
 class Utils {
 
@@ -54,8 +54,7 @@ class Utils {
     static void writeContents(File file, Object... contents) {
         try {
             if (file.isDirectory()) {
-                throw
-                        new IllegalArgumentException("cannot overwrite directory");
+                throw new IllegalArgumentException("cannot overwrite directory");
             }
             BufferedOutputStream str =
                     new BufferedOutputStream(Files.newOutputStream(file.toPath()));
@@ -93,7 +92,6 @@ class Utils {
         writeContents(file, serialize(obj));
     }
 
-
     /* OTHER FILE UTILITIES */
 
     /** Return the concatentation of FIRST and OTHERS into a File designator,
@@ -110,7 +108,6 @@ class Utils {
         return Paths.get(first.getPath(), others).toFile();
     }
 
-
     /* SERIALIZATION UTILITIES */
 
     /** Returns a byte array containing the serialized contents of OBJ. */
@@ -126,8 +123,6 @@ class Utils {
         }
     }
 
-
-
     /* MESSAGES AND ERROR REPORTING */
 
     /**
@@ -139,7 +134,7 @@ class Utils {
      * @param message message to print
      */
     public static void exitWithError(String message) {
-        if (message != null && !message.equals("")) {
+        if (message != null && !message.isEmpty()) {
             System.out.println(message);
         }
         System.exit(-1);
