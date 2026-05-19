@@ -7,6 +7,7 @@ import java.util.Random;
  *  @author Josh Hug
  */
 public class StringUtils {
+
     /** To get the style checker to be quiet. */
     private static final int ALPHABET_SIZE = 26;
 
